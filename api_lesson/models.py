@@ -1,5 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+
+
+# class User(AbstractUser):
+#     name = models.CharField(max_length=30)
+#     email = models.CharField(max_length=255, unique=True)
+#     password = models.CharField(max_length=255)
+#     role = models.IntegerField(default=0)
+#     username = None
+#
+#     USERNAME_FIELD = 'email'
+#     REQUIRED_FIELDS = []
 
 
 class Lesson(models.Model):
