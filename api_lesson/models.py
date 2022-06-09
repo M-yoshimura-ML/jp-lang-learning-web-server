@@ -26,7 +26,7 @@ class Lesson(models.Model):
 
     @property
     def contents(self):
-        return self.lessoncontent_set.all()
+        return self.lessoncontent_set.all().order_by('order_num')
 
 
 class LessonContent(models.Model):

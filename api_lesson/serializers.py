@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Lesson, LessonContent, User
+from rest_framework.response import Response
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -31,6 +32,7 @@ class LessonContentSerializer(serializers.ModelSerializer):
             'content',
             'order_num'
         ]
+        ordering = ['order_num']
         read_only_fields = ('lesson',)
         # depth=1
 
@@ -47,6 +49,12 @@ class LessonSerializer(serializers.ModelSerializer):
             'level',
             'contents'
         ]
+
+    def get(self, request, id=None):
+        lesson = self.get_object()
+        contents = LessonContent.objects.filter(lesson=lesson)
+        serializer = LessonContentSerializer(contents, many=True)
+        return Response(serializer.data, status=200)
 
     def create(self, validated_data):
         contents = validated_data.pop('contents')
@@ -68,6 +76,7 @@ class LessonSerializer(serializers.ModelSerializer):
                 if LessonContent.objects.filter(id=content['id']).exists():
                     c = LessonContent.objects.get(id=content['id'])
                     c.content = content.get('content', c.content)
+                    c.order_num = content.get('order_num', c.order_num)
                     c.save()
                     keep_contents.append(c.id)
                 else:
