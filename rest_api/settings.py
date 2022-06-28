@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
-
-ALLOWED_HOSTS = ['jp-lang-learning-web-api.herokuapp.com']
+WEB_SERVER = config('WEB_SERVER')
+ALLOWED_HOSTS = ['127.0.0.1', WEB_SERVER]
 
 
 # Application definition
@@ -64,16 +64,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
+CLIENT_SERVER = config('CLIENT_SERVER')
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'https://jp-lang-learning.vercel.app'
+    CLIENT_SERVER
 ]
 
 SIMPLE_JWT = {
     # 'AUTH_HEADER_TYPES': ('JWT',),
     'AUTH_HEADER_TYPES': ('Bearer',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=90),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=11),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
