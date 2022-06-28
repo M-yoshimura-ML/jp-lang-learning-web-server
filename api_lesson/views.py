@@ -112,7 +112,7 @@ class LogoutView(APIView):
 
 
 class LessonListView(generics.ListAPIView):
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.all().order_by('id')
     serializer_class = LessonSerializer
     permission_classes = (AllowAny,)
 
