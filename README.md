@@ -8,12 +8,14 @@
 
 -   Python >=3.8
 
-### Laravel Packages Installed
+### Packages Installed
 
--   Authentication:
+- Authentication:
 
-    -   `"djangorestframework-simplejwt"`
-
+    - `"djangorestframework-simplejwt"`
+  
+- Others:
+  - See requirements-dev.txt
 
 # Getting Started
 
